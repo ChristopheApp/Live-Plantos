@@ -2,7 +2,7 @@ import api from '../api/api' // API Initialize with axios
 
 const gtaGameID = "32982"; // GTA V game ID
 const language = 'fr';
-const nbOfStreams = "50"; //Number of streams to get with one request
+const nbOfStreams = "5"; //Number of streams to get with one request
 
 // Funtion that get GTA Y live streams with spécific language
 const getStreams = async (pagination) => {

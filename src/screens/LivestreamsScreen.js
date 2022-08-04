@@ -6,23 +6,6 @@ import ColorButton from "../styled/ColorButton"
 
 const gtaGameID = "32982";
 
-const data = {
-    game_id: "32982",
-    game_name: "Grand Theft Auto V",
-    id: "45866229756",
-    is_mature: false,
-    language: "fr",
-    started_at: "2022-08-04T08:00:52Z",
-    tag_ids: ['6f655045-9989-4ef7-8f85-1edcec42d648'],
-    thumbnail_url: "https://static-cdn.jtvnw.net/previews-ttv/live_user_dylan_del_rey-{width}x{height}.jpg",
-    title: "Honneur et fidélité. [EP28/S3] | 21 Jumpclick !discord !RP",
-    type: "live",
-    user_id: "83822427",
-    user_login: "dylan_del_rey",
-    user_name: "Dylan_Del_Rey",
-    viewer_count: 205,
-}
-
 function LivestreamsScreen() {
 
     const [streams, setStreams] = useState([]);
@@ -32,12 +15,21 @@ function LivestreamsScreen() {
     const [stream, setStream] = useState({});
     const [displayCard, setDisplayCard] = useState(false);
 
+    const [streamToDisplay, setStreamToDisplay] = useState([])
+
     useEffect( ()=> {
     
         // Only for the test i guess, i should already have the data
         const fetchData = async () => {
             let result = await getStreams();
+            setStreams(result.data)
             setStream(result.data[1])
+
+            result.data.map((stream) => {
+                if(stream.title.includes("21 Jumpclick")) {
+                    setStreamToDisplay([...streamToDisplay, ...stream])
+                }
+            })
         }
         fetchData();
 
@@ -71,9 +63,9 @@ function LivestreamsScreen() {
     }
 
 
-
     const handleClickBtnAfficher = () => {
-        console.log(streams);        
+        console.log(streams)
+        console.log(streamToDisplay);        
     }
 
     return(
