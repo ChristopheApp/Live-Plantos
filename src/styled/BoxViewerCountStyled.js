@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
 
 
-const ViewerCount = styled(Box)(() => ({
+const BoxViewerCount = styled(Box)(() => ({
     color: "#d50000",
     display: 'flex',
     flexDirection: 'row',
@@ -11,4 +11,4 @@ const ViewerCount = styled(Box)(() => ({
     
   }));
 
-export default ViewerCount;
+export default BoxViewerCount;

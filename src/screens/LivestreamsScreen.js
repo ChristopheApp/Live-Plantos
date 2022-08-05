@@ -15,7 +15,8 @@ function LivestreamsScreen() {
     const [stream, setStream] = useState({});
     const [displayCard, setDisplayCard] = useState(false);
 
-    const [streamToDisplay, setStreamToDisplay] = useState([])
+    const [streamToDisplay, setStreamToDisplay] = useState()
+
 
     useEffect( ()=> {
     
@@ -25,11 +26,13 @@ function LivestreamsScreen() {
             setStreams(result.data)
             setStream(result.data[1])
 
-            result.data.map((stream) => {
-                if(stream.title.includes("21 Jumpclick")) {
-                    setStreamToDisplay([...streamToDisplay, ...stream])
+            const display = result.data.map((stream, i) => {
+                if(stream.title.includes("21 Jumpclick") || stream.title.includes("21 Jump Click") || stream.title.includes("21 Jump click")) {
+                    return(<CardStream key={i} data={stream} />);
                 }
             })
+
+            setStreamToDisplay(display)
         }
         fetchData();
 
@@ -69,20 +72,22 @@ function LivestreamsScreen() {
     }
 
     return(
-        <div className="embed">
-            <p>Salut</p>
+        <div className="displayStreams">
+            {/* <p>Salut</p>
             <ButtonLp variant='contained' onClick={handleClickBtn} >
                 Load more streams
             </ButtonLp>
 
             <ColorButton onClick={handleClickBtnAfficher} >
                 Afficher
-            </ColorButton>
+            </ColorButton> */}
 
-            {displayCard
+            {/* {displayCard
                 ? <CardStream data={stream} />
                 : <div/>
-            }
+            } */}
+
+            {streamToDisplay}
 
         </div>
     );

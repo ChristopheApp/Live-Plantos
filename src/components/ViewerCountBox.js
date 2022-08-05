@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Box } from '@mui/system';
 
-import ViewerCountStyled from "../styled/ViewerCountStyled";
+import BoxViewerCountStyled from "../styled/BoxViewerCountStyled";
 
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
@@ -23,13 +23,13 @@ export default function CardStreamBox(props) {
     },[])
 
   return (
-        <ViewerCountStyled component='div'>
+        <BoxViewerCountStyled component='div'>
             <PersonOutlineOutlinedIcon sx={{
                 color: 'inherit',
                 }} />
             <Typography gutterBottom variant="h5" color="inherit" component="div">
                 {props.viewerCount}
             </Typography>
-        </ViewerCountStyled>           
+        </BoxViewerCountStyled>           
   );
 }

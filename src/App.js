@@ -1,4 +1,6 @@
 import React from 'react'
+import { Routes, Route, Link } from "react-router-dom";
+
 import LoadingScreen from './screens/LoadingScreen';
 import LivestreamsScreen from './screens/LivestreamsScreen';
 import './App.css';
@@ -6,7 +8,11 @@ import './App.css';
 function App() {
   return (
     <div className="LP-app">
-      <LivestreamsScreen />
+      <Routes>
+        <Route path="/" element={<LoadingScreen />} />
+        <Route path="livestreams" element={<LivestreamsScreen />} /> 
+      </Routes>
+      
 
     </div>
   );

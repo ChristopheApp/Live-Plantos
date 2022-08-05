@@ -26,6 +26,13 @@ min-height: 100vh;}
 
 }
 
+.displayStreams {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .embed {
   display: flex;
   flex-direction: column;

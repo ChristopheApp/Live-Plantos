@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 
 import CardStyled from "../styled/CardStyled";
-import CardContent from '@mui/material/CardContent';
+import BoxNameViewerStyled from "../styled/BoxNameViewerStyled";
+import CardContent from "@mui/material/CardContent";
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
@@ -26,7 +27,7 @@ export default function CardStream(props) {
     },[])
 
   return (
-    <CardStyled sx={{ maxWidth: 345 }}>
+    <CardStyled >
       <CardActionArea >
         <CardMedia
           component='img'
@@ -35,13 +36,7 @@ export default function CardStream(props) {
           alt={data.user_login}
         />
         <CardContent>
-            <Box component="div" sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    maxWidth: { md: 345 },
-                    }}>
+            <BoxNameViewerStyled component="div" >
 
                 <Typography gutterBottom variant="h5"  component="div">
                     {data.user_name}
@@ -49,7 +44,7 @@ export default function CardStream(props) {
                 
                 <ViewerCountBox viewerCount={data.viewer_count}/>
 
-            </Box>
+            </BoxNameViewerStyled >
           <Typography variant="body2" color="white">
             {data.title}
           </Typography>
