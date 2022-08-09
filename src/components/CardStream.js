@@ -18,12 +18,10 @@ export default function CardStream(props) {
     const [urlThumbnail, setUrlThumbnail] = useState('');
 
     useEffect (() => {
-        console.log(data)
         let url = data.thumbnail_url
         url = url.replace('{width}', '1920');
         url = url.replace('{height}', '1080');
         setUrlThumbnail(url)
-        console.log(url)
     },[])
 
   return (

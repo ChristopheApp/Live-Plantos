@@ -16,12 +16,6 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 
 export default function CardStreamBox(props) {
 
-    const [data, setData] = useState(props)
-
-    useEffect (() => {
-        console.log(data)
-    },[])
-
   return (
         <BoxViewerCountStyled component='div'>
             <PersonOutlineOutlinedIcon sx={{

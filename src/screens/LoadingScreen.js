@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import CardStream from '../components/CardStream'
 import getStreams from '../api/getStreams'
 
-let navigate = useNavigate();
+let navigate = useNavigate;
 
 function LoadingScreen() {
 
@@ -38,11 +38,6 @@ function LoadingScreen() {
         setReadyToDisplay(true);
     }, [streamsToDisplay])
 
-    // Quand on est prêt à afficher on change d'écran
-    useEffect( () => {
-      if(readyToDisplay)
-        redirectLS();
-    }, [readyToDisplay])
 
     // Function that request twitch API to load streams
     const loadStreams = async () => {
@@ -79,12 +74,7 @@ function LoadingScreen() {
     })
     setStreamsToDisplay(display);
   }
-
-
-  const redirectLS = () => {
-    navigate('/livestream')
-  }
-
+ 
 
   const handleClickBtnAfficher = () => {
     console.log(streams)
@@ -106,6 +96,9 @@ function LoadingScreen() {
         <img onClick={handleClickBtnAfficher} src='images/Los_Plantos_LoadingScreen.png' className="LP-logo" alt="emote LP" />
       {/* </a> */}
       
+
+      {readyToDisplay && <Navigate replace to="/livestreams" stateTest={{state: "test"}} />}
+
     </div>
   );
 }

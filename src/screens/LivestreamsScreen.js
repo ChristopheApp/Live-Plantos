@@ -3,10 +3,13 @@ import CardStream from '../components/CardStream'
 import getStreams from '../api/getStreams'
 import ButtonLp from '../styled/ButtonLp'
 import ColorButton from "../styled/ColorButton"
+import { useLocation } from "react-router-dom"
 
 const gtaGameID = "32982";
 
-function LivestreamsScreen() {
+const location = useLocation;
+
+function LivestreamsScreen(props) {
 
     const [streams, setStreams] = useState([]);
     const [pagination, setPagination] = useState();
@@ -19,6 +22,8 @@ function LivestreamsScreen() {
 
 
     useEffect( ()=> {
+
+        console.log(location)
     
         // Only for the test i guess, i should already have the data
         const fetchData = async () => {
