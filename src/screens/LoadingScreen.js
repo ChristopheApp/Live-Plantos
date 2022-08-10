@@ -125,7 +125,7 @@ function LoadingScreen() {
     console.log(streamsArray)
     const array = [];
     streamsArray.map((stream, i) => {
-      if(stream.title.match(regexp21JC)) {
+      if(stream.title.match(regexpLP)) {
         array.push(stream);
     }
       // if(stream.title.includes("21 Jumpclick") || stream.title.includes("21 Jump Click") || stream.title.includes("21 Jump click")) {
