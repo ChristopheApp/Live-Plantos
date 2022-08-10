@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 
 import CardStyled from "../styled/CardStyled";
 import BoxNameViewerStyled from "../styled/BoxNameViewerStyled";
+import ViewerCountBox from "../components/ViewerCountBox";
+
 import CardContent from "@mui/material/CardContent";
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import { Box } from '@mui/system';
 
-import ViewerCountBox from "../components/ViewerCountBox";
 
 
 

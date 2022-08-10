@@ -1,5 +1,9 @@
 import api from './api' // API Initialize with axios
 
+import config from '../config/config';
+
+const globalVar = config.api.global;
+
 // Request that return User infos for a given user login.
 const getUserFromLogin = async(user_login) => {
 

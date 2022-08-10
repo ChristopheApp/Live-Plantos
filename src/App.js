@@ -13,9 +13,9 @@ function App() {
     <div className="LP-app">
       <Routes>
         <Route path="/" element={<LoadingScreen />} />
-        <Route path="livestreams" element={<LivestreamsScreen />} />
-        <Route path="loadstreams" element={<LoadFollowedStreams />} />  
-        <Route path="counter" element={<Counter />} />
+        <Route path="/livestreams" element={<LivestreamsScreen />} />
+        <Route path="/loadstreams" element={<LoadFollowedStreams />} />  
+        <Route path="/counter" element={<Counter />} />
       </Routes>
       
 

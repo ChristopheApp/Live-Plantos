@@ -1,23 +1,35 @@
 import React, {useState, useEffect} from 'react'
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import CardStream from '../components/CardStream'
+import loadStreams from '../utils/loadStreams';
+
 import getStreamsByGameId from '../api/getStreamsByGameId'
 import getUserFromLogin from '../api/getUserFromLogin';
 import getStreamsByUserFollows from '../api/getStreamsByUserFollows';
 
-const userId = "147359949"; // User ID : Kin4y
+import { useSelector, useDispatch } from 'react-redux'
+import {    getData  } from '../app/localhostReducer'
 
 
-// Store in variable a RegExp to match the title of the stream with "21 Jumpclick" or "21 JUMPCLICK" or "21 jumpclick" or "21 Jump Click" or "21 Jump click" or "21 JUMP ClICK" or "21 JUMP CLICK" or "21 Jump Click" or "21 Jump click" or "21 Jump ClICK"
-const regexp21JC = /(21 *[jJ][uU][mM][pP] *[cC][lL][iI][cC][kK]) | (21 *[jJ] *[cC])/;
-
-// Store in variable a RegExp to match the title of the stream with "Los Plantos" or "Los plantos" or "LosPlantos" or "LOSPLANTOS" or "LOS PLANTOS"
-const regexpLP = /([lL][oO][sS] *[pP][lL][aA][nN][tT][oO][sS]) | ([lL][pP])/;
-
+const data = {
+  useFollows: false,
+  userId: "147359949",
+  language: "fr",
+  limit: "100",
+  gameId: "32982",
+  pagination: "",
+}
 
 function LoadingScreen() {
+
   let navigate = useNavigate();
+
+  const globalVar = useSelector(getData)
+  const dispatch = useDispatch()
+
+  console.log(globalVar)
+  const regexp21JC = /(21.*[jJ][uU][mM][pP].*[cC][lL][iI][cC][kK])|(.*21 *[jJ] *[cC].*)/;
+  const regexpLP = /([lL][oO][sS] *[pP][lL][aA][nN][tT][oO][sS])/;
 
   const [readyToDisplay, setReadyToDisplay] = useState(false);
   const [streamsNotFound, setStreamsNotFound] = useState(false);
@@ -32,9 +44,8 @@ function LoadingScreen() {
 
     useEffect( ()=> {
       // AU chargement de la page on récupère tous les streams
-      loadStreamsByGame();
-      //getStreamsByGameId()    
-     //getStreamsByUserFollows()
+      //loadStreamsByGame();
+      loadAllStreams(data);
     }, [])
 
     // Quand il n'y a plus de streams à charger on les tris pour récupéré que ceux qui nous interesse
@@ -61,6 +72,13 @@ function LoadingScreen() {
       }
     }, [streamsToDisplay])
 
+
+    const loadAllStreams = async (_data) => {
+      let result = await loadStreams(_data);
+      console.log(result)
+      setStreams(result);
+      setMoreStreams(false);
+    }
 
     // Function that request twitch API to load streams
     const loadStreamsByGame = async () => {
@@ -104,6 +122,7 @@ function LoadingScreen() {
 
   // Select only streams with "21 jump click" in the title
   const selectStreams = (streamsArray) => {
+    console.log(streamsArray)
     const array = [];
     streamsArray.map((stream, i) => {
       if(stream.title.match(regexp21JC)) {

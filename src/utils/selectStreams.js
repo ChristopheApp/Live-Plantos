@@ -17,3 +17,5 @@ const selectStreams = async (streams) => {
   );
   return array;
 }
+
+export default selectStreams;

@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 
+import config from '../config/config';
+
+const header = config.api.headers;
+
 // https://id.twitch.tv/oauth2/authorize?[parameters]
 // parameters : client_id, redirect_uri, response_type, scope, state
-const clientId = "3qlhvtm78xgpq4nw63dqlgp07zb0zg"; // Your app’s registered client ID.
-const redirectUri = "http://localhost:3000/";
-const responseType = "token";
+const clientId = header.client_id; // Your app’s registered client ID.
+const redirectUri = header.redirectUri; // Your app’s registered redirect URI.
+const responseType = header.responseType; // The response type you want to use.
 // twitch scope to read user follows
-const scope = "user:read:follows";
+const scope = header.scope;
 //Access token for my twitch account with these parameters : 
 //#access_token=gs6d188f7eus71a6kxlt5obfvgydum&scope=user%3Aread%3Afollows&token_type=bearer
 
