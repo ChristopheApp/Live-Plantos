@@ -1,7 +1,7 @@
-import api from '../api/api' // API Initialize with axios
+import api from './api' // API Initialize with axios
 
 // Request that return a game ID on Twitch for a given game name.
-const getGameId = async(gameName) => {
+const getGameIdByGameName = async(gameName) => {
 
     const result = await api.get(`https://api.twitch.tv/helix/games?name=${gameName}`)
 
@@ -9,4 +9,4 @@ const getGameId = async(gameName) => {
     return result.data.data
 }
 
-export default getGameId;
+export default getGameIdByGameName;

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react"
 import CardStream from '../components/CardStream'
-import getStreams from '../api/getStreams'
 import ButtonLp from '../styled/ButtonLp'
 import ColorButton from "../styled/ColorButton"
 import { useLocation } from "react-router-dom"
@@ -62,23 +61,23 @@ function LivestreamsScreen(props) {
     }
 
     
-    const handleClickBtn = async () => {
+    // const handleClickBtn = async () => {
 
-        // If we have more stream to search with theses parameters
-        if (moreStreams) {
+    //     // If we have more stream to search with theses parameters
+    //     if (moreStreams) {
 
-            let result = await getStreams(pagination);
-            setStreams([...streams, ...result.data])
-            setPagination(result.pagination.cursor)
-            console.log(result.data)
+    //         let result = await getStreams(pagination);
+    //         setStreams([...streams, ...result.data])
+    //         setPagination(result.pagination.cursor)
+    //         console.log(result.data)
             
-            if(!result.data[0])
-                setMoreStreams(false)
+    //         if(!result.data[0])
+    //             setMoreStreams(false)
 
-        } else { // 
-            console.log('No more streams, no need to search')
-        }
-    }
+    //     } else { // 
+    //         console.log('No more streams, no need to search')
+    //     }
+    // }
 
 
     const handleClickBtnAfficher = () => {

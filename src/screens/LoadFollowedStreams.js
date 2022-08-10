@@ -6,7 +6,6 @@ import getStreamsByGameId from '../api/getStreamsByGameId'
 import getUserFromLogin from '../api/getUserFromLogin';
 import getStreamsByUserFollows from '../api/getStreamsByUserFollows';
 
-const userId = "147359949"; // User ID : Kin4y
 
 
 // Store in variable a RegExp to match the title of the stream with "21 Jumpclick" or "21 JUMPCLICK" or "21 jumpclick" or "21 Jump Click" or "21 Jump click" or "21 JUMP ClICK" or "21 JUMP CLICK" or "21 Jump Click" or "21 Jump click" or "21 Jump ClICK"
@@ -31,10 +30,9 @@ function LoadingScreen() {
 
 
     useEffect( ()=> {
-      // AU chargement de la page on récupère tous les streams
-      loadStreamsByGame();
-      //getStreamsByGameId()    
-     //getStreamsByUserFollows()
+
+      loadStreamsByFollow();
+      
     }, [])
 
     // Quand il n'y a plus de streams à charger on les tris pour récupéré que ceux qui nous interesse
@@ -62,45 +60,19 @@ function LoadingScreen() {
     }, [streamsToDisplay])
 
 
-    // Function that request twitch API to load streams
-    const loadStreamsByGame = async () => {
 
-      let loading = true;
-      let pag = pagination;
+    const loadStreamsByFollow = async () => {
+
       let array = [];
 
       // If we have more stream to search with theses parameters
-      while (loading) {
-
-          let result = await getStreamsByGameId(pag);
-          console.log(result.data)
-          array = array.concat(result.data)
-          //setStreams([...streams, ...result.data])
-          pag = result.pagination.cursor;
-          
-          if(!result.data[0]){
-            loading = false;
-            setPagination(pag);
-            setStreams(array);
-            setMoreStreams(false);
-            return array;
-          }
-
-      }
+      let result = await getStreamsByUserFollows();
+      console.log(result.data)
+      array = array.concat(result.data)
+        
+      setStreams(array);
+      setMoreStreams(false);
   }
-
-  const loadStreamsByFollow = async () => {
-
-    // .then( (streams) => {
-    //   setStreams(streams);
-    //   setReadyToDisplay(true);
-    // }).catch( (error) => {
-    //   console.log(error);
-    // } )
-  
-  }
-
-
 
   // Select only streams with "21 jump click" in the title
   const selectStreams = (streamsArray) => {
@@ -118,13 +90,12 @@ function LoadingScreen() {
  
 
   const handleClickBtnAfficher = () => {
-    console.log(streams)
+    console.log('clic img')
 }
 
   return (
     <div className="LoadingScreen">
-      {!streamsNotFound ? <h1>Recherche de stream en cours</h1> : <h1>Pas de stream trouvé</h1>}
-
+      
       {/* <a
         className="LP-link"
         href="http://discord.gg/losplantos"

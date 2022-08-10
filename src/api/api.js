@@ -1,13 +1,13 @@
 import axios from 'axios'
+import config from '../config/config';
 
-const clientID = '3qlhvtm78xgpq4nw63dqlgp07zb0zg';
-const accesToken1 = "yjaff25jjq46e6812xopn7b9mi7csu";
-const accesToken2 = "f8l79xbpjy9l6974900k8bbhn0rnk4";
+const header = config.api.headers;
 
 let api = axios.create({
   headers: {
-    'Client-ID': clientID,
-    'Authorization' : 'Bearer yjaff25jjq46e6812xopn7b9mi7csu'
+    'Client-ID': header.client_id,
+    // To use GetFollewedStreams, need OAuth token
+    'Authorization' : header.authorization
   }
 })
 export default api
