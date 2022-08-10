@@ -7,9 +7,16 @@ import { useLocation } from "react-router-dom"
 
 const gtaGameID = "32982";
 
-const location = useLocation;
+// Store in variable a RegExp to match the title of the stream with "21 Jumpclick" or "21 JUMPCLICK" or "21 jumpclick" or "21 Jump Click" or "21 Jump click" or "21 JUMP ClICK" or "21 JUMP CLICK" or "21 Jump Click" or "21 Jump click" or "21 Jump ClICK"
+const regexp21JC = /(21 *[jJ][uU][mM][pP] *[cC][lL][iI][cC][kK]) | (21 *[jJ] *[cC])/;
+
+// Store in variable a RegExp to match the title of the stream with "Los Plantos" or "Los plantos" or "LosPlantos" or "LOSPLANTOS" or "LOS PLANTOS"
+const regexpLP = /([lL][oO][sS] *[pP][lL][aA][nN][tT][oO][sS]) | ([lL][pP])/;
+
+
 
 function LivestreamsScreen(props) {
+    const location = useLocation();
 
     const [streams, setStreams] = useState([]);
     const [pagination, setPagination] = useState();
@@ -18,38 +25,41 @@ function LivestreamsScreen(props) {
     const [stream, setStream] = useState({});
     const [displayCard, setDisplayCard] = useState(false);
 
-    const [streamToDisplay, setStreamToDisplay] = useState()
+    const [streamsToDisplay, setStreamsToDisplay] = useState([])
 
 
     useEffect( ()=> {
 
-        console.log(location)
-    
-        // Only for the test i guess, i should already have the data
-        const fetchData = async () => {
-            let result = await getStreams();
-            setStreams(result.data)
-            setStream(result.data[1])
-
-            const display = result.data.map((stream, i) => {
-                if(stream.title.includes("21 Jumpclick") || stream.title.includes("21 Jump Click") || stream.title.includes("21 Jump click")) {
-                    return(<CardStream key={i} data={stream} />);
-                }
-            })
-
-            setStreamToDisplay(display)
-        }
-        fetchData();
-
+        console.log(location.state)
+        if(location.state) {
+            console.log('set streams')
+            setStreams(location.state)
+        } 
+        
     }, [])
 
     // Display a card with stream props if stream is not empty
     useEffect( ()=> {
-        if(Object.keys(stream).length !== 0) { // test if stream is not empty and display card
+        displayStreams(streams);
+        
+    }, [streams])
+
+    // Display a card with stream props if stream is not empty
+    useEffect( ()=> {
+        if(streamsToDisplay.length !== 0) { // test if stream is not empty and display card
+            console.log("display card")
             setDisplayCard(true);
         }
         
-    }, [stream])
+    }, [streamsToDisplay])
+
+    function displayStreams(streams) {
+        const array = []; 
+        streams.map((stream, i) => {
+            array.push(<CardStream key={i} data={stream} />);
+        })
+        setStreamsToDisplay(array);
+    }
 
     
     const handleClickBtn = async () => {
@@ -73,7 +83,7 @@ function LivestreamsScreen(props) {
 
     const handleClickBtnAfficher = () => {
         console.log(streams)
-        console.log(streamToDisplay);        
+        console.log(streamsToDisplay);        
     }
 
     return(
@@ -92,7 +102,7 @@ function LivestreamsScreen(props) {
                 : <div/>
             } */}
 
-            {streamToDisplay}
+            {streamsToDisplay}
 
         </div>
     );

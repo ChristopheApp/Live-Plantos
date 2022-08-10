@@ -4,18 +4,25 @@ import { Navigate, useNavigate } from "react-router-dom";
 import CardStream from '../components/CardStream'
 import getStreams from '../api/getStreams'
 
-let navigate = useNavigate;
+// Store in variable a RegExp to match the title of the stream with "21 Jumpclick" or "21 JUMPCLICK" or "21 jumpclick" or "21 Jump Click" or "21 Jump click" or "21 JUMP ClICK" or "21 JUMP CLICK" or "21 Jump Click" or "21 Jump click" or "21 Jump ClICK"
+const regexp21JC = /(21 *[jJ][uU][mM][pP] *[cC][lL][iI][cC][kK]) | (21 *[jJ] *[cC])/;
+
+// Store in variable a RegExp to match the title of the stream with "Los Plantos" or "Los plantos" or "LosPlantos" or "LOSPLANTOS" or "LOS PLANTOS"
+const regexpLP = /([lL][oO][sS] *[pP][lL][aA][nN][tT][oO][sS]) | ([lL][pP])/;
+
 
 function LoadingScreen() {
+  let navigate = useNavigate();
 
   const [readyToDisplay, setReadyToDisplay] = useState(false);
+  const [streamsNotFound, setStreamsNotFound] = useState(false);
 
   const [streams, setStreams] = useState([]);
   const [pagination, setPagination] = useState("");
   
   const [moreStreams, setMoreStreams] = useState(true)
 
-  const [streamsToDisplay, setStreamsToDisplay] = useState(null)
+  const [streamsToDisplay, setStreamsToDisplay] = useState([])
 
 
     useEffect( ()=> {
@@ -32,10 +39,20 @@ function LoadingScreen() {
         
     }, [moreStreams])
 
-    // QUand on a des stream prêt à etre afficher, on dit qu'on est prêt
+    // Quand on a des stream prêt à etre afficher, on change de page
     useEffect( () => {
-      if(streamsToDisplay)
+      if(streamsToDisplay.length > 0){
+        console.log('ready to display')
+        console.log(streamsToDisplay)
+        navigate('/livestreams', { state: streamsToDisplay });
+
         setReadyToDisplay(true);
+
+      } else {
+        console.log("pas de stream")
+        setStreamsNotFound(true);
+
+      }
     }, [streamsToDisplay])
 
 
@@ -60,6 +77,7 @@ function LoadingScreen() {
             setPagination(pag);
             setStreams(array);
             setMoreStreams(false);
+            return array;
           }
 
       }
@@ -67,12 +85,16 @@ function LoadingScreen() {
 
   // Select only streams with "21 jump click" in the title
   const selectStreams = (streamsArray) => {
-    const display = streamsArray.map((stream, i) => {
-      if(stream.title.includes("21 Jumpclick") || stream.title.includes("21 Jump Click") || stream.title.includes("21 Jump click")) {
-          return(<CardStream key={i} data={stream} />);
-      }
+    const array = [];
+    streamsArray.map((stream, i) => {
+      if(stream.title.match(regexp21JC)) {
+        array.push(stream);
+    }
+      // if(stream.title.includes("21 Jumpclick") || stream.title.includes("21 Jump Click") || stream.title.includes("21 Jump click")) {
+      //     array.push(<CardStream key={i} data={stream} />);
+      // }
     })
-    setStreamsToDisplay(display);
+    setStreamsToDisplay(array);
   }
  
 
@@ -82,10 +104,8 @@ function LoadingScreen() {
 
   return (
     <div className="LoadingScreen">
-      <p>
-        Recherche de stream en cours
-      </p>
-      
+      {!streamsNotFound ? <h1>Recherche de stream en cours</h1> : <h1>Pas de stream trouvé</h1>}
+
       {/* <a
         className="LP-link"
         href="http://discord.gg/losplantos"
@@ -97,7 +117,7 @@ function LoadingScreen() {
       {/* </a> */}
       
 
-      {readyToDisplay && <Navigate replace to="/livestreams" stateTest={{state: "test"}} />}
+      {/* {readyToDisplay && <Navigate replace to="/livestreams" state={{state: "test"}} />} */}
 
     </div>
   );
