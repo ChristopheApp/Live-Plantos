@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const myAPI = createSlice({
-    name: 'globalVar',
+    name: 'data',
     initialState: {
         client_id: '3qlhvtm78xgpq4nw63dqlgp07zb0zg',
-        client_secret: process.env.REACT_APP_SECRET_TWITCH_LH,
+        client_secret: process.env.REACT_APP_CLIENT_SECRET,
         authorization : '',
         redirectUri: "http://localhost:3000/",
         responseType: "token",
@@ -19,12 +19,12 @@ export const myAPI = createSlice({
     
     },
     reducers: {
-      setAuthorization: state => {
+      setAuthorization: (state, action) => {
         // Redux Toolkit allows us to write "mutating" logic in reducers. It
         // doesn't actually mutate the state because it uses the immer library,
         // which detects changes to a "draft state" and produces a brand new
         // immutable state based off those changes
-        state.value += 1
+        state.authorization = action.payload
       },
       decrement: state => {
         state.value -= 1
@@ -38,7 +38,7 @@ export const myAPI = createSlice({
   export const { setAuthorization, decrement, incrementByAmount } = myAPI.actions
 
 
-  export const getData = state => state.globalVar
+  export const getData = state => state.data
 
 
 

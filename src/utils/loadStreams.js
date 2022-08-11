@@ -4,6 +4,7 @@ import getStreamsByUserFollows from "../api/getStreamsByUserFollows";
 const loadStreams = async (data) => {
 
     console.log("loadStreams : " + JSON.stringify(data))
+    
     if (data.useFollows && data.userId) {
 
         console.log("load stream by follows")  

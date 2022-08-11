@@ -4,6 +4,7 @@ import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import LoadingScreen from './screens/LoadingScreen';
 import LivestreamsScreen from './screens/LivestreamsScreen';
 import LoadFollowedStreams from './screens/LoadFollowedStreams';
+import InitApi from './api/initApiAccessToken';
 import { Counter } from './features/counter/Counter';
 import './App.css';
 
@@ -14,7 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LoadingScreen />} />
         <Route path="/livestreams" element={<LivestreamsScreen />} />
-        <Route path="/loadstreams" element={<LoadFollowedStreams />} />  
+        <Route path="/loadstreams" element={<LoadFollowedStreams />} />
+        <Route path="/initapi" element={<InitApi />} />  
         <Route path="/counter" element={<Counter />} />
       </Routes>
       

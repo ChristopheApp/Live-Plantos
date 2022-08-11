@@ -29,12 +29,9 @@ et récupéré l'access token dans l'url de retour, a mettre dans api.js
 
 */
 
-function Live() {
-    const fetchData = async () => {
+const fetchData = async () => {
       await axios.get(`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`)
-      .then(response => console.log(response))
-    }
-    fetchData()
-  
 }
+  
+
 export default Live
