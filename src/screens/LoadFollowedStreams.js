@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Navigate, useNavigate } from "react-router-dom";
 
-import CardStream from '../components/CardStream'
-import getStreamsByGameId from '../api/getStreamsByGameId'
-import getUserFromLogin from '../api/getUserFromLogin';
 import getStreamsByUserFollows from '../api/getStreamsByUserFollows';
 
 

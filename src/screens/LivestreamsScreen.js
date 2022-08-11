@@ -7,10 +7,7 @@ function LivestreamsScreen(props) {
     const location = useLocation();
 
     const [streams, setStreams] = useState([]);
-    const [pagination, setPagination] = useState();
-    const [moreStreams, setMoreStreams] = useState(true)
 
-    const [stream, setStream] = useState({});
     const [displayCard, setDisplayCard] = useState(false);
 
     const [streamsToDisplay, setStreamsToDisplay] = useState([])

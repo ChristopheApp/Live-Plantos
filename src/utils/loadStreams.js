@@ -2,27 +2,23 @@ import getStreamsByGameId from "../api/getStreamsByGameId";
 import getStreamsByUserFollows from "../api/getStreamsByUserFollows";
 
 const loadStreams = async (data) => {
+    // Si on utilise le mode followed users
+    if (data.use_follows && data.user_id) {
 
-    console.log("loadStreams : " + JSON.stringify(data))
-    
-    if (data.useFollows && data.userId) {
-
-        console.log("load stream by follows")  
-        const result = await getStreamsByUserFollows(data.userId);
+        const result = await getStreamsByUserFollows(data);
         return result.data;
 
-    } else if(data.gameId) {
-        console.log("load stream by game")  
+        // Sinon on cherche dans tous les streams GTA V
+    } else if(data.game_id) {
 
         let loading = true;
-        let pag = data.pagination;
+        let pag = "";
         let array = [];
 
         // If we have more stream to search with theses parameters
         while (loading) {
 
-            let result = await getStreamsByGameId(data.language, data.limit, data.gameId, pag);
-            console.log(result.data)
+            let result = await getStreamsByGameId(data, pag);
             array = array.concat(result.data)
             //setStreams([...streams, ...result.data])
             pag = result.pagination.cursor;
