@@ -4,8 +4,6 @@ import CircularProgress, {
   circularProgressClasses,
 } from '@mui/material/CircularProgress';
 
-import Typography from '@mui/material/Typography';
-
 import TypographyLP from '../styled/TypographyLP';
 
 export default function LoadingComponent(props) {

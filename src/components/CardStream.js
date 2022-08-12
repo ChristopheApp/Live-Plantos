@@ -25,7 +25,7 @@ export default function CardStream(props) {
     },[])
 
   return (
-    <CardStyled variant="outlined" >
+    <CardStyled xs={12} sm={10} md={8} lg={6} xl={4}  variant="outlined" >
       <CardActionArea >
         <CardMedia
           component='img'

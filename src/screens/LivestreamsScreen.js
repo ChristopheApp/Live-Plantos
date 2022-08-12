@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react"
 import CardStream from '../components/CardStream'
+import { Box } from '@mui/system';
+
 import { useLocation } from "react-router-dom"
 
 
@@ -47,11 +49,12 @@ function LivestreamsScreen() {
     }
 
     return(
-        <div className="displayStreams">
+        <Box style={{ width: '100%', display: 'flex',   
+        flexFlow: 'row wrap', transform: 'scale(0.9)' }}>
 
             {streamsToDisplay}
 
-        </div>
+        </Box>
     );
 }
 

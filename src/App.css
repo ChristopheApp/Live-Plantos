@@ -6,16 +6,19 @@ background: -webkit-linear-gradient(top,  #9907a5 0%,#f636a7 100%); /* Chrome10-
 background: linear-gradient(to bottom,  #9907a5 0%,#f636a7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9907a5', endColorstr='#f636a7',GradientType=0 ); /* IE6-9 */
 min-height: 100vh;
-
-display: flex;
-justify-content: center;
-
+min-width: 100vw;
 
 }
 
 .LP-logo {
   height: 60vmin;
   margin: 40px;
+  transition: transform 2s;
+
+}
+
+.LP-logo:hover{
+  transform: rotate(360deg);
 }
 
 
@@ -30,7 +33,13 @@ justify-content: center;
   font-size: calc(10px + 2vmin);
   -webkit-text-stroke: 1px black;
   color: white;
+}
 
+.livestreamScreen {
+  display: 'flex';
+  justify-content: 'space-around';
+  flex-wrap: 'wrap';
+  transform: 'scale(0.8)'
 }
 
 .ScreenError404 {

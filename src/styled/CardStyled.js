@@ -4,8 +4,8 @@ import { purple } from '@mui/material/colors';
 
 
 const CardStyled = styled(Card)((props) => ({
-    maxWidth: 345,
-    maxHeight: 300,
+    width: 345,
+    height: 300,
     color: 'white',
     margin: "10px",
 
