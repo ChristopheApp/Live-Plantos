@@ -3,7 +3,7 @@ import CardStream from '../components/CardStream'
 import { useLocation } from "react-router-dom"
 
 
-function LivestreamsScreen(props) {
+function LivestreamsScreen() {
     const location = useLocation();
 
     const [streams, setStreams] = useState([]);
@@ -46,46 +46,8 @@ function LivestreamsScreen(props) {
         setStreamsToDisplay(array);
     }
 
-    
-    // const handleClickBtn = async () => {
-
-    //     // If we have more stream to search with theses parameters
-    //     if (moreStreams) {
-
-    //         let result = await getStreams(pagination);
-    //         setStreams([...streams, ...result.data])
-    //         setPagination(result.pagination.cursor)
-    //         console.log(result.data)
-            
-    //         if(!result.data[0])
-    //             setMoreStreams(false)
-
-    //     } else { // 
-    //         console.log('No more streams, no need to search')
-    //     }
-    // }
-
-
-    const handleClickBtnAfficher = () => {
-        console.log(streams)
-        console.log(streamsToDisplay);        
-    }
-
     return(
         <div className="displayStreams">
-            {/* <p>Salut</p>
-            <ButtonLp variant='contained' onClick={handleClickBtn} >
-                Load more streams
-            </ButtonLp>
-
-            <ColorButton onClick={handleClickBtnAfficher} >
-                Afficher
-            </ColorButton> */}
-
-            {/* {displayCard
-                ? <CardStream data={stream} />
-                : <div/>
-            } */}
 
             {streamsToDisplay}
 

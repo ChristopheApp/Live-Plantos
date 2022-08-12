@@ -17,7 +17,7 @@ export const myAPI = createSlice({
         user_id: '147359949', // Compte : Kin4y, compte pour le mode followed users
         // J'ai autorisé le read follow sur mon compte pour les 2 apps enregistrées sur Twitch.
         regExp21JC: /(21 *[jJ][uU][mM][pP] *[cC][lL][iI][cC][kK])|(21 *[jJ] *[cC])/,
-        regExpLP: /([lL][oO][sS] *[pP][lL][aA][nN][tT][oO][sS])|([lL][pP])/,
+        regExpLP: /([lL][oO][sS] *[pP][lL][aA][nN][tT][oO][sS])/,
     
     }
   })

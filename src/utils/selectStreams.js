@@ -1,7 +1,12 @@
-//Function tha receive an array of streams, and return only stream with a specified RegExp int the title
-const selectStreams = async (data, streamsArray) => {
+import loadStreams from "./loadStreams";
+const regExpTest = /([lL][oO][sS][21Plnatos][pP][lL][aA][nN][tT][oO][sS])/; 
 
-  const regExp = data.regExpLP;
+//Function tha receive an array of streams, and return only stream with a specified RegExp int the title
+const selectStreams = async (data) => {
+
+  const regExp = data.regExp21JC;
+
+  const streamsArray = await loadStreams(data)
 
   const array = [];
   streamsArray.map((stream, i) => {

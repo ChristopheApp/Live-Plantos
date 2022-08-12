@@ -4,9 +4,11 @@ import { purple } from '@mui/material/colors';
 
 
 const CardStyled = styled(Card)((props) => ({
-    width: 345,
-    height: 300,
+    maxWidth: 345,
+    maxHeight: 300,
     color: 'white',
+    margin: "10px",
+
     backgroundColor: purple[900],
     '&:hover': {
       backgroundColor: purple[700],

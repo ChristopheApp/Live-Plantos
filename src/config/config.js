@@ -15,8 +15,8 @@ const configLocalhost = {
         language: 'fr',
         limit: '100',
         userId: '147359949', // Compte : Kin4y
-        regExp21JC: /(21 *[jJ][uU][mM][pP] *[cC][lL][iI][cC][kK]) | (21 *[jJ] *[cC])/,
-        regExpLP: /([lL][oO][sS] *[pP][lL][aA][nN][tT][oO][sS]) | ([lL][pP])/,
+        regExp21JC: /(21 *[jJ][uU][mM][pP] *[cC][lL][iI][cC][kK])|(21 *[jJ] *[cC])/,
+        regExpLP: /([lL][oO][sS] *[pP][lL][aA][nN][tT][oO][sS])/,
     }  
 
 }

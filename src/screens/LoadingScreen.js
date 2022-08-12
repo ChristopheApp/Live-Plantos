@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from "react-router-dom";
 
+import LoadingComponent from '../components/LoadingTextAndProgress';
+import TypographyLP from '../styled/TypographyLP';
+
+import getWishesStreams from '../utils/getWishesStreams';
 import loadStreams from '../utils/loadStreams';
 import selectStreams from '../utils/selectStreams';
+
+import { useNavigate } from "react-router-dom";
 
 import { useSelector } from 'react-redux'
 import { getData } from '../app/myApiReducer'
@@ -14,9 +19,11 @@ function LoadingScreen() {
   const [moreStreamsToLoad, setMoreStreamsToLoad] = useState(true)
 
   const [selectedStreams, setSelectedStreams] = useState([]);
-  const [selectionFinished, setSelectionFinished] = useState(false);
+  const [selectionFinished, setSelectionFinished] = useState();
 
-  const [moreStreamsToSelect, setMoreStreamsToSelect] = useState(true)
+  const [moreStreamsToSelect, setMoreStreamsToSelect] = useState()
+
+  const [displayNoStreamsFound, setDisplayNoStreamsFound] = useState(false);
 
   let navigate = useNavigate();
 
@@ -26,8 +33,17 @@ function LoadingScreen() {
 
   // AU chargement de la page on récupère tous les streams
     useEffect( ()=> {
-      loadAllStreams(apiData);
+      //loadAllStreams(apiData);
+      console.log('i fire once');
+
+      wishesStreams(apiData);
     }, [])
+
+    const wishesStreams = async(data) => {
+      const result = await getWishesStreams(data);
+      setStreams(result);
+      console.log(result);
+    }
 
     // Quand il n'y a plus de streams à charger on les tris pour récupéré que ceux qui nous interesse
     useEffect( () => {
@@ -40,31 +56,31 @@ function LoadingScreen() {
 
     useEffect( () => {
       
-      console.log('moreStreamToSelect changed (no sense if display, i go die)')
+      console.log('SelectionFinished changed (no sense if display, i go die)')
 
-      if(!moreStreamsToLoad)
-      console.log('more stream to select changed to false')
-        
-    }, [moreStreamsToSelect])
-
-    // Quand le tri est fini, on change de page si on a des streams à afficher
-    useEffect( () => {
-
-      console.log("ca vient quand ici bordel")
-      if(selectionFinished && selectedStreams.length > 0){
-        console.log('ready to display')
-        console.log(selectedStreams)
-        navigate('/livestreams', { state: selectedStreams });
-
-
-      } else {
-        console.log("pas de stream")
-        setStreamsNotFound(true);
-
+      if(selectionFinished){
+        console.log('Selection finie')
+        console.log('selectedStreams.length > 0')
+          console.log(selectedStreams.length > 0)
+          console.log(selectedStreams)
+          if(selectedStreams.length > 0){
+            setStreamsNotFound(false);
+            navigate('/livestreams', { state: selectedStreams });
+        } else {
+          console.log("pas de stream")
+          setStreamsNotFound(true);
+        }
       }
+        
     }, [selectedStreams, selectionFinished])
 
+    useEffect (() => {
+      if(streamsNotFound){
+        setDisplayNoStreamsFound(true);
+      }
+    }, [streamsNotFound])
 
+    // Load all streams from twitch api
     const loadAllStreams = async (_data) => {
       let result = await loadStreams(_data);
       console.log(result)
@@ -73,7 +89,7 @@ function LoadingScreen() {
     }
 
 
-  // Select only streams with "21 jump click" in the title
+  // Select only streams we want to display
   const selectWishesStreams = async (_data, _streamsArray) => {
     let result = await selectStreams(_data, _streamsArray);
     console.log(result)
@@ -88,8 +104,8 @@ function LoadingScreen() {
 
   return (
     <div className="LoadingScreen">
-      <h1>Recherche de stream en cours</h1>
-      {streamsNotFound && selectionFinished ? <h1>Pas de stream trouvé</h1> : null}
+      {!selectionFinished ? <LoadingComponent /> : null}
+      {displayNoStreamsFound && selectionFinished ? <TypographyLP>Il n'y a aucun stream en cours sur Los Plantos</TypographyLP> : null}
 
       {/* <a
         className="LP-link"
