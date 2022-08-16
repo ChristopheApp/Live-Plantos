@@ -61,15 +61,15 @@ function LoadingScreen() {
       {!selectionFinished ? <LoadingComponent /> : null}
       {streamsNotFound ? <TypographyLP mb={7}>Il n'y a aucun stream en cours sur Los Plantos</TypographyLP> : null}
 
-      {/* <a
+      <a
         className="LP-link"
         href="http://discord.gg/losplantos"
         target="_blank"
         rel="noopener noreferrer"
-      > */}
+      >
 
         <img onClick={handleClickBtnAfficher} src='images/Los_Plantos_LoadingScreen.png' className="LP-logo" alt="emote LP" />
-      {/* </a> */}
+      </a>
       </div>
       }
     </div>
