@@ -1,10 +1,7 @@
-import React, {useState, useEffect} from "react"
+import React, { useEffect} from "react"
 import { useNavigate } from "react-router-dom";
-import CardStream from '../components/CardStream'
-import { useLocation } from "react-router-dom"
 
-
-function ScreenError404(props) {
+function ScreenError404() {
     const navigate = useNavigate();
 
     // useEffect that redirect to home page after 5 secondes

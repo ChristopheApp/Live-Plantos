@@ -1,7 +1,6 @@
 //import styled from "styled-components";
 import { styled } from '@mui/material/styles';
-import Button, { ButtonProps } from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import { purple } from '@mui/material/colors';
 
 

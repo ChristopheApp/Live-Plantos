@@ -9,12 +9,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-
-
-
 export default function CardStream(props) {
 
-    const [data, setData] = useState(props.data);
+    const [data] = useState(props.data);
     const [urlThumbnail, setUrlThumbnail] = useState('');
 
     useEffect (() => {

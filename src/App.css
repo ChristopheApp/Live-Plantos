@@ -13,12 +13,13 @@ min-width: 100vw;
 .LP-logo {
   height: 60vmin;
   margin: 40px;
-  transition: transform 2s;
+  /* transition: transform 5s; */
+
 
 }
 
 .LP-logo:hover{
-  transform: rotate(360deg);
+  transform: rotate3d(0, 1, 0, 360deg);
 }
 
 

@@ -1,7 +1,6 @@
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
-
 const TypographyLP = styled(Typography)(() => ({
     textAlign: 'center',
     fontFamily: 'Comic Sans MS',

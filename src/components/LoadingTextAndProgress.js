@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Stack from '@mui/material/Stack';
-import CircularProgress, {
-  circularProgressClasses,
-} from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import TypographyLP from '../styled/TypographyLP';
 

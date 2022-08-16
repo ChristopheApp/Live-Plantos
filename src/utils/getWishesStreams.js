@@ -1,4 +1,3 @@
-import loadStreams from "./loadStreams";
 import selectStreams from "./selectStreams";
 
 const getWishesStreams = async (apiData) => {
