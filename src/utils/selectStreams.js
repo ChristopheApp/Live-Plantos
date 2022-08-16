@@ -6,7 +6,9 @@ const selectStreams = async (data) => {
 
   const regExp = data.regExp21JC;
 
-  const streamsArray = await loadStreams(data)
+  const result = await loadStreams(data)
+
+  const streamsArray = result.data;
 
   const array = [];
   streamsArray.map((stream, i) => {
@@ -14,7 +16,7 @@ const selectStreams = async (data) => {
       array.push(stream);
     }
   });
-  return array;
+  return {result: result, data: array};
 }
 
 export default selectStreams;

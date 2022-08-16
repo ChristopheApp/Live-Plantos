@@ -19,7 +19,7 @@ function LoadingScreen() {
   const [moreStreamsToLoad, setMoreStreamsToLoad] = useState(true)
 
   const [selectedStreams, setSelectedStreams] = useState([]);
-  const [selectionFinished, setSelectionFinished] = useState();
+  const [selectionFinished, setSelectionFinished] = useState(false);
 
   const [moreStreamsToSelect, setMoreStreamsToSelect] = useState()
 
@@ -41,61 +41,29 @@ function LoadingScreen() {
 
     const wishesStreams = async(data) => {
       const result = await getWishesStreams(data);
-      setStreams(result);
+      setSelectionFinished(true);
+      setStreams(result.data);
       console.log(result);
     }
 
-    // Quand il n'y a plus de streams à charger on les tris pour récupéré que ceux qui nous interesse
-    useEffect( () => {
-
-      if(!moreStreamsToLoad)
-      console.log('selectedStreams')
-        selectWishesStreams(apiData, streams);
-        
-    }, [moreStreamsToLoad])
-
-    useEffect( () => {
-      
-      console.log('SelectionFinished changed (no sense if display, i go die)')
-
-      if(selectionFinished){
-        console.log('Selection finie')
-        console.log('selectedStreams.length > 0')
-          console.log(selectedStreams.length > 0)
-          console.log(selectedStreams)
-          if(selectedStreams.length > 0){
-            setStreamsNotFound(false);
-            navigate('/livestreams', { state: selectedStreams });
-        } else {
-          console.log("pas de stream")
-          setStreamsNotFound(true);
-        }
+    useEffect( ()=> {
+      if(streams.length !== 0) {
+        console.log('Stream found');
+        navigate('/livestreams', { state: streams });
+      } else if (selectionFinished) {
+        console.log('No stream found');
+        setStreamsNotFound(true);
       }
-        
-    }, [selectedStreams, selectionFinished])
+      
+    }, [streams])
 
-    useEffect (() => {
-      if(streamsNotFound){
+    useEffect( ()=> {
+      if(streamsNotFound) {
+        console.log('display no streams found');
         setDisplayNoStreamsFound(true);
       }
     }, [streamsNotFound])
 
-    // Load all streams from twitch api
-    const loadAllStreams = async (_data) => {
-      let result = await loadStreams(_data);
-      console.log(result)
-      setStreams(result);
-      setMoreStreamsToLoad(false);
-    }
-
-
-  // Select only streams we want to display
-  const selectWishesStreams = async (_data, _streamsArray) => {
-    let result = await selectStreams(_data, _streamsArray);
-    console.log(result)
-    setSelectedStreams(result);
-    setSelectionFinished(true);
-  }
  
 
   const handleClickBtnAfficher = () => {
@@ -105,7 +73,7 @@ function LoadingScreen() {
   return (
     <div className="LoadingScreen">
       {!selectionFinished ? <LoadingComponent /> : null}
-      {displayNoStreamsFound && selectionFinished ? <TypographyLP>Il n'y a aucun stream en cours sur Los Plantos</TypographyLP> : null}
+      {streamsNotFound ? <TypographyLP>Il n'y a aucun stream en cours sur Los Plantos</TypographyLP> : null}
 
       {/* <a
         className="LP-link"

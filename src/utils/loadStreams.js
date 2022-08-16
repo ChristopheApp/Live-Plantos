@@ -6,7 +6,7 @@ const loadStreams = async (data) => {
     if (data.use_follows && data.user_id) {
 
         const result = await getStreamsByUserFollows(data);
-        return result.data;
+        return {result: result, data: result.data};
 
         // Sinon on cherche dans tous les streams GTA V
     } else if(data.game_id) {
@@ -25,7 +25,7 @@ const loadStreams = async (data) => {
             
             if(!result.data[0]){
                 loading = false;
-                return array;
+                return {result: result, data: array};
             }
         }
     }
