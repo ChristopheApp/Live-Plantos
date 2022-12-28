@@ -5,7 +5,7 @@ export const myAPI = createSlice({
     initialState: {
         client_id: '3qlhvtm78xgpq4nw63dqlgp07zb0zg',
         client_secret: process.env.REACT_APP_CLIENT_SECRET,
-        authorization : 'Bearer gs6d188f7eus71a6kxlt5obfvgydum',
+        authorization : 'Bearer 3wufongf41yq4sl32hnnpe52dvii3l',
         redirect_uri: "http://localhost:3000/",
         response_type: "token",
         scope: "user:read:follows",

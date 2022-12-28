@@ -22,13 +22,11 @@ function LoadingScreen() {
   // AU chargement de la page on récupère tous les streams
     useEffect( ()=> {
       //loadAllStreams(apiData);
-      console.log('i fire once');
 
       loadStreams(apiData);
     }, [])
 
     const loadStreams = async(data) => {
-      console.log('i fire again');
       const result = await getWishesStreams(data);
       console.log('waiting for result');
       setSelectionFinished(true);
